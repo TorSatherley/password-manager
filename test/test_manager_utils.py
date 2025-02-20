@@ -51,5 +51,17 @@ class TestEntry:
             captured = capsys.readouterr()
             assert captured.out == "Secret saved!\n"
 
+
+    @mock_aws
+    def test_entry_raises_resource_exists_exception(self, capsys):
+        with patch(
+            "builtins.input", side_effect=["Missile_Launch_Codes", "bidenj", "Pa55word","Missile_Launch_Codes", "bidenj", "Pa55word"]
+        ):
+            client = boto3.client("secretsmanager")
+            entry(client)
+            capsys.readouterr()
+            entry(client)
+            captured = capsys.readouterr()
+            assert captured.out == 'Error: An error occurred (ResourceExistsException) when calling the CreateSecret operation: A resource with the ID you requested already exists.\n'
     # test failure print statement
     # test error handling e.g. couldnt connect to aws etc
