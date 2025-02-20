@@ -12,7 +12,10 @@ with user interfacing via CLI.
     - prompt UserId: user enters bidenj
     - prompt Password: user entters Pa55word
         - print EITHER secret saved OR some kind of error
-        - add secret to secret list
+        - add secret to secret list DONE
+  
+- for l: 
+    - print number of secrets available. DONE
 
 - for r:
     - prompt 'Specify secret to retrieve:'
@@ -22,9 +25,6 @@ with user interfacing via CLI.
     - prompt 'Specify secret to delete:'
     - delete secret, print Deleted or error message
 
-  
-- for l: 
-    - print number of secrets available.
 
 - for x:
     - print 'thank you, goodbye', dissconnect from password manager

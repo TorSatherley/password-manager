@@ -1,3 +1,6 @@
+import json
+
+
 def get_user_choice():
     user_choice = str(
         input("Please specify [e]ntry, [r]etrieval, [d]eletion, [l]isting or e[x]it: ")
@@ -18,7 +21,7 @@ def entry(client):
 
         client.create_secret(
             Name=secret_identifier,
-            SecretString=f'{{\n  "Username":"{username}",\n  "password":"{password}"\n}}\n',
+            SecretString=f'{{\n  "Username":"{username}",\n  "Password":"{password}"\n}}\n',
         )
         print("Secret saved!")
     except Exception as r:
@@ -27,4 +30,20 @@ def entry(client):
 
 def list_secrets(client):
     secrets = client.list_secrets()
-    return len(secrets['SecretList'])
+    return len(secrets["SecretList"])
+
+
+def retrieve_secrets(client):
+    try:
+        secret_id = str(input('Specify secret to retrieve: '))
+        secret = client.get_secret_value(
+            SecretId=secret_id
+        )
+        secret_string = secret['SecretString']
+        secretjson = json.loads(secret_string)
+    
+        f = open("secret.txt", 'w')
+        f.write(f'Username: {secretjson['Username']}\nPassword: {secretjson['Password']}\n')
+        print(f'{secret_id} stored in local file secrets.txt')
+    except Exception as e:
+        print(f'Error: {e}')
