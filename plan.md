@@ -7,9 +7,6 @@ PROGRAM OUTLINE:
 with user interfacing via CLI.
 - If wrong key entterd, print "invalid input. please specify..."
 
-- for l: 
-    - print number of secrets available.
-
 - for e: 
     - prompt 'Secret Identifier:' - user enters eg. 'Missile_Launch_Codes'
     - prompt UserId: user enters bidenj
@@ -24,6 +21,10 @@ with user interfacing via CLI.
 - for d:
     - prompt 'Specify secret to delete:'
     - delete secret, print Deleted or error message
+
+  
+- for l: 
+    - print number of secrets available.
 
 - for x:
     - print 'thank you, goodbye', dissconnect from password manager
