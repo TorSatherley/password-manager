@@ -1,4 +1,4 @@
-from utils.manager_utils import get_user_choice, entry
+from utils.manager_utils import get_user_choice, entry, list_secrets
 import pytest
 from unittest.mock import patch, Mock
 import boto3
@@ -86,3 +86,27 @@ class TestEntry:
             entry(client)
             captured = capsys.readouterr()
             assert "Error:" in captured.out
+
+
+class TestList:
+
+    @mock_aws
+    def test_list_returns_zero_for_zero_secrets(self):
+        client = boto3.client("secretsmanager")
+        assert list_secrets(client) == 0
+
+    @mock_aws
+    def test_list_returns_one_for_single_secret(self):
+        client = boto3.client("secretsmanager")
+        client.create_secret(Name='test', SecretString='teststring')
+        assert list_secrets(client) == 1
+
+    @mock_aws
+    def test_list_returns_five_for_five_secrets(self):
+        client = boto3.client("secretsmanager")
+        client.create_secret(Name='test1', SecretString='teststring1')
+        client.create_secret(Name='test2', SecretString='teststring2')
+        client.create_secret(Name='test3', SecretString='teststring3')
+        client.create_secret(Name='test4', SecretString='teststring4')
+        client.create_secret(Name='test5', SecretString='teststring5')
+        assert list_secrets(client) == 5

@@ -23,3 +23,8 @@ def entry(client):
         print("Secret saved!")
     except Exception as r:
         print(f"Error: {r}")
+
+
+def list_secrets(client):
+    secrets = client.list_secrets()
+    return len(secrets['SecretList'])
