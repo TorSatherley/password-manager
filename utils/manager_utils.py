@@ -30,20 +30,34 @@ def entry(client):
 
 def list_secrets(client):
     secrets = client.list_secrets()
-    return len(secrets["SecretList"])
+    print(f'{len(secrets["SecretList"])} secrets stored')
 
 
 def retrieve_secrets(client):
     try:
-        secret_id = str(input('Specify secret to retrieve: '))
-        secret = client.get_secret_value(
-            SecretId=secret_id
-        )
-        secret_string = secret['SecretString']
+        secret_id = str(input("Specify secret to retrieve: "))
+        secret = client.get_secret_value(SecretId=secret_id)
+        secret_string = secret["SecretString"]
         secretjson = json.loads(secret_string)
-    
-        f = open("secret.txt", 'w')
-        f.write(f'Username: {secretjson['Username']}\nPassword: {secretjson['Password']}\n')
-        print(f'{secret_id} stored in local file secrets.txt')
+
+        f = open("secret.txt", "w")
+        f.write(
+            f"Username: {secretjson['Username']}\nPassword: {secretjson['Password']}\n"
+        )
+        print(f"{secret_id} stored in local file secrets.txt")
     except Exception as e:
-        print(f'Error: {e}')
+        print(f"Error: {e}")
+
+
+def delete_secret(client):
+    try:
+        secret_id = str(input("Specify secret to delete: "))
+        client.delete_secret(SecretId=secret_id)
+        print(f"{secret_id} successfully deleted")
+    except Exception as e:
+        print(f"Error: {e}")
+
+
+def exit():
+    print("Thank you, Goodbye!")
+    return "exit"
