@@ -19,4 +19,3 @@ venv/
 *.zip
 **/.terraform*
 *.tfstate*
-requirements.txt
