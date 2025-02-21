@@ -23,7 +23,7 @@ def aws_credentials():
     os.environ["AWS_DEFAULT_REGION"] = "eu-west-2"
 
 
-#@pytest.mark.skip
+# @pytest.mark.skip
 class TestGetUserChoice:
 
     @pytest.mark.parametrize("user_input", ["l", "e", "r", "d", "x"])
@@ -41,7 +41,7 @@ class TestGetUserChoice:
             assert result == "invalid"
 
 
-#@pytest.mark.skip
+# @pytest.mark.skip
 class TestEntry:
 
     @mock_aws
@@ -96,7 +96,7 @@ class TestEntry:
             assert "Error:" in captured.out
 
 
-#@pytest.mark.skip
+# @pytest.mark.skip
 class TestListSecrets:
 
     @mock_aws
@@ -104,7 +104,7 @@ class TestListSecrets:
         client = boto3.client("secretsmanager")
         list_secrets(client)
         captured = capsys.readouterr()
-        assert captured.out == '0 secrets stored\n'
+        assert captured.out == "0 secrets stored\n"
 
     @mock_aws
     def test_list_returns_one_for_single_secret(self, capsys):
@@ -112,7 +112,7 @@ class TestListSecrets:
         client.create_secret(Name="test", SecretString="teststring")
         list_secrets(client)
         captured = capsys.readouterr()
-        assert captured.out == '1 secrets stored\n'
+        assert captured.out == "1 secrets stored\n"
 
     @mock_aws
     def test_list_returns_five_for_five_secrets(self, capsys):
@@ -124,10 +124,10 @@ class TestListSecrets:
         client.create_secret(Name="test5", SecretString="teststring5")
         list_secrets(client)
         captured = capsys.readouterr()
-        assert captured.out == '5 secrets stored\n'
+        assert captured.out == "5 secrets stored\n"
 
 
-#@pytest.mark.skip
+# @pytest.mark.skip
 class TestRetrieveSecrets:
 
     @mock_aws
@@ -173,7 +173,7 @@ class TestRetrieveSecrets:
             assert "Error:" in captured.out
 
 
-#@pytest.mark.skip
+# @pytest.mark.skip
 class TestDeleteSecret:
 
     @mock_aws
