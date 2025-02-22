@@ -12,6 +12,10 @@ client = boto3.client("secretsmanager")
 
 
 def run_password_manager(client):
+    """Allows the password manager programme to run: checks for user input and redirects program to the
+    relevant util function. On exit, closes the user interface and returns to the normal command line.
+    """
+
     while True:
         user_choice = get_user_choice()
         if user_choice == "e":

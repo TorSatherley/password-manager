@@ -7,7 +7,7 @@ from utils.manager_utils import (
     exit,
 )
 import pytest
-from unittest.mock import patch, Mock
+from unittest.mock import patch
 import boto3
 from moto import mock_aws
 import os
@@ -23,7 +23,6 @@ def aws_credentials():
     os.environ["AWS_DEFAULT_REGION"] = "eu-west-2"
 
 
-# @pytest.mark.skip
 class TestGetUserChoice:
 
     @pytest.mark.parametrize("user_input", ["l", "e", "r", "d", "x"])
@@ -41,7 +40,6 @@ class TestGetUserChoice:
             assert result == "invalid"
 
 
-# @pytest.mark.skip
 class TestEntry:
 
     @mock_aws
@@ -96,7 +94,6 @@ class TestEntry:
             assert "Error:" in captured.out
 
 
-# @pytest.mark.skip
 class TestListSecrets:
 
     @mock_aws
@@ -127,7 +124,6 @@ class TestListSecrets:
         assert captured.out == "5 secrets stored\n"
 
 
-# @pytest.mark.skip
 class TestRetrieveSecrets:
 
     @mock_aws
@@ -173,7 +169,6 @@ class TestRetrieveSecrets:
             assert "Error:" in captured.out
 
 
-# @pytest.mark.skip
 class TestDeleteSecret:
 
     @mock_aws
