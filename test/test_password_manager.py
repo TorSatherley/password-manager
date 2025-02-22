@@ -21,7 +21,7 @@ class TestRunProcessManager:
     @mock_aws
     def test_funct_triggers_get_user_choice_with_error_and_exits(self, capsys):
         with patch("builtins.input", side_effect=["t", "x"]):
-            client = boto3.client("secretsmanager")
+            client = boto3.client("secretsmanager", region_name='eu-west-2')
             run_password_manager(client)
             captured = capsys.readouterr()
             assert captured.out == "invalid input.\nThank you, Goodbye!\n"
