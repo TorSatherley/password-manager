@@ -19,3 +19,5 @@ venv/
 *.zip
 **/.terraform*
 *.tfstate*
+secret.txt
+
