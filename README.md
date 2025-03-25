@@ -125,3 +125,7 @@ to start the application in the command line. Follow the instruction printed to 
 This project has been designed to be maintained using continuous integration and continuous deployment - specifically using GitHub actions. This enables seamless updates of the project into the production environment, and runs all of the same checks as the 'make run-checks' command.
 
 To test this, make a branch of your forked version of the repo, make a change and then merge it with main. Check the "Actions" tab on this repo on your GitHub account to see all unit tests and compliance checks run automatically within the workflow.
+
+## Author
+
+Tor Satherley
